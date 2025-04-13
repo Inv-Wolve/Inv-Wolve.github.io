@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const password = document.getElementById('password').value;
 
         try {
-            const response = await fetch('http://helya.pylex.software:10209/thebooklogin', {
+            const response = await fetch('http://helya.pylex.xyz:10209/thebooklogin', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Load Restaurants
     async function loadRestaurants() {
         try {
-            const response = await fetch('http://helya.pylex.software:10209/restaurants');
+            const response = await fetch('http://helya.pylex.xyz:10209/restaurants');
             const restaurants = await response.json();
             displayRestaurants(restaurants);
         } catch (error) {
@@ -78,7 +78,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Fetch Reviews for a Restaurant
     async function fetchReviews(restaurantId) {
         try {
-            const response = await fetch(`http://helya.pylex.software:10209/reviews?restaurant_id=${restaurantId}`);
+            const response = await fetch(`http://helya.pylex.xyz:10209/reviews?restaurant_id=${restaurantId}`);
             return await response.json();
         } catch (error) {
             console.error('Error fetching reviews:', error);
@@ -159,7 +159,7 @@ document.addEventListener('DOMContentLoaded', function() {
         };
 
         try {
-            const restaurantResponse = await fetch('http://helya.pylex.software:10209/restaurants', {
+            const restaurantResponse = await fetch('http://helya.pylex.xyz:10209/restaurants', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -176,7 +176,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 review: document.getElementById('review-text').value
             };
 
-            await fetch('http://helya.pylex.software:10209/reviews', {
+            await fetch('http://helya.pylex.xyz:10209/reviews', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -205,7 +205,7 @@ document.addEventListener('DOMContentLoaded', function() {
         };
 
         try {
-            await fetch('http://helya.pylex.software:10209/reviews', {
+            await fetch('http://helya.pylex.xyz:10209/reviews', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
