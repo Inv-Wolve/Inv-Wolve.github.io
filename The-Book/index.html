@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Book.</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div id="login-container" class="container">
+        <div class="card">
+            <h2>Login</h2>
+            <form id="login-form">
+                <div class="input-group">
+                    <input type="password" id="password" placeholder="Enter password" required>
+                </div>
+                <button type="submit" class="btn">Login</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="main-container" class="container hidden">
+        <header>
+            <h1>Restaurant Reviews</h1>
+            <button id="add-restaurant-btn" class="btn">Add Restaurant</button>
+        </header>
+
+        <div id="restaurants-list" class="restaurants-grid"></div>
+
+        <!-- Add Restaurant Modal -->
+        <div id="add-restaurant-modal" class="modal">
+            <div class="modal-content">
+                <h2>Add New Restaurant</h2>
+                <form id="add-restaurant-form">
+                    <div class="input-group">
+                        <input type="text" id="restaurant-name" placeholder="Restaurant Name" required>
+                    </div>
+                    <div class="input-group">
+                        <select id="restaurant-type" required>
+                            <option value="">Select Type</option>
+                            <option value="Restaurant">Restaurant</option>
+                            <option value="Brand">Brand</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <input type="text" id="product-name" placeholder="Product Name" required>
+                    </div>
+                    <div class="input-group">
+                        <div class="rating">
+                            <i class="fas fa-star" data-rating="1"></i>
+                            <i class="fas fa-star" data-rating="2"></i>
+                            <i class="fas fa-star" data-rating="3"></i>
+                            <i class="fas fa-star" data-rating="4"></i>
+                            <i class="fas fa-star" data-rating="5"></i>
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <textarea id="review-text" placeholder="Write your review" required></textarea>
+                    </div>
+                    <div class="modal-buttons">
+                        <button type="submit" class="btn">Add</button>
+                        <button type="button" class="btn btn-secondary" id="close-modal">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Add Review Modal -->
+        <div id="add-review-modal" class="modal">
+            <div class="modal-content">
+                <h2>Add New Review</h2>
+                <form id="add-review-form">
+                    <input type="hidden" id="review-restaurant-id">
+                    <div class="input-group">
+                        <input type="text" id="review-product-name" placeholder="Product Name" required>
+                    </div>
+                    <div class="input-group">
+                        <div class="rating">
+                            <i class="fas fa-star" data-rating="1"></i>
+                            <i class="fas fa-star" data-rating="2"></i>
+                            <i class="fas fa-star" data-rating="3"></i>
+                            <i class="fas fa-star" data-rating="4"></i>
+                            <i class="fas fa-star" data-rating="5"></i>
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <textarea id="new-review-text" placeholder="Write your review" required></textarea>
+                    </div>
+                    <div class="modal-buttons">
+                        <button type="submit" class="btn">Add Review</button>
+                        <button type="button" class="btn btn-secondary" id="close-review-modal">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
