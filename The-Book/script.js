@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const password = document.getElementById('password').value;
 
         try {
-            const response = await fetch('http://helya.pylex.xyz:10209/thebooklogin', {
+            const response = await fetch('http://helya.pylex.xyz:10209/loginbook', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
