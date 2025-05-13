@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zykro's Profile</title>
+    <link rel="icon" type="image/x-icon" href="../me mrbean rounded.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<style>
+    @tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary: #f0f4ff;
+  --secondary: #e0e7ff;
+  --accent: #818cf8;
+  --text: #1e293b;
+  --card-bg: rgba(255, 255, 255, 0.95);
+  font-family: "Poppins", system-ui, sans-serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Opening screen styles */
+.opening-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  transition: opacity 1s ease-out;
+}
+
+.open-button {
+  background: var(--accent);
+  color: white;
+  border: none;
+  padding: 1.5rem 3.5rem;
+  font-size: 1.5rem;
+  border-radius: 50px;
+  cursor: pointer;
+  font-family: "Poppins", system-ui, sans-serif;
+  font-weight: 600;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 10px 25px rgba(129, 140, 248, 0.5);
+  position: relative;
+  overflow: hidden;
+}
+
+.open-button:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(129, 140, 248, 0.6);
+}
+
+.open-button:active {
+  transform: scale(0.95);
+}
+
+.main-content {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 1s ease-out, transform 1s ease-out;
+  pointer-events: none;
+}
+
+.main-content.visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: all;
+}
+
+.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+body {
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  color: var(--text);
+  min-height: 100vh;
+  line-height: 1.6;
+  background-attachment: fixed;
+  background-size: 400% 400%;
+  animation: gradientBG 15s ease infinite;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 4rem;
+  animation: fadeDown 1s ease-out;
+  position: relative;
+}
+
+.profile-container {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  margin: 0 auto 2rem;
+  animation: float 6s ease-in-out infinite;
+}
+
+.profile-picture {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid var(--accent);
+  box-shadow: 0 0 30px rgba(129, 140, 248, 0.4);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.profile-picture:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 40px rgba(129, 140, 248, 0.6);
+}
+
+.profile-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 220px;
+  height: 220px;
+  background: radial-gradient(
+    circle,
+    rgba(129, 140, 248, 0.3) 0%,
+    transparent 70%
+  );
+  border-radius: 50%;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.header::after {
+  content: "";
+  position: absolute;
+  bottom: -1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  border-radius: 2px;
+}
+
+.header h1 {
+  font-size: clamp(2.5rem, 5vw, 3.5rem);
+  color: var(--accent);
+  margin-bottom: 1rem;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+  letter-spacing: -0.5px;
+}
+
+.header p {
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  opacity: 0.9;
+  letter-spacing: 0.5px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.music-player {
+  background: var(--card-bg);
+  padding: 2rem;
+  border-radius: 24px;
+  margin: 2rem auto;
+  max-width: 400px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  animation: fadeUp 1s ease-out;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.music-player h3 {
+  color: var(--accent);
+  margin-bottom: 1.5rem;
+  font-size: 1.25rem;
+}
+
+.music-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.play-button {
+  background: var(--accent);
+  color: white;
+  border: none;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 5px 15px rgba(129, 140, 248, 0.4);
+}
+
+.play-button:hover {
+  transform: scale(1.1) translateY(-2px);
+  box-shadow: 0 8px 25px rgba(129, 140, 248, 0.5);
+}
+
+.play-button:active {
+  transform: scale(0.95);
+}
+
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 500px), 1fr));
+  gap: 2.5rem;
+  padding: 1rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.card {
+  background: var(--card-bg);
+  border-radius: 24px;
+  padding: 2.5rem;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  animation: fadeUp 1s ease-out;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  position: relative;
+  overflow: hidden;
+}
+
+.card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    45deg,
+    transparent,
+    rgba(129, 140, 248, 0.15),
+    transparent
+  );
+  transform: translateX(-100%);
+  transition: transform 0.8s ease;
+}
+
+.card:hover::before {
+  transform: translateX(100%);
+}
+
+.card:hover {
+  transform: translateY(-12px);
+  box-shadow: 0 20px 45px rgba(129, 140, 248, 0.25);
+}
+
+.card h2 {
+  color: var(--accent);
+  margin-bottom: 1.5rem;
+  font-size: 1.75rem;
+  position: relative;
+  padding-bottom: 0.75rem;
+  letter-spacing: -0.5px;
+}
+
+.card h2::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 50px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent), transparent);
+  border-radius: 2px;
+  transition: width 0.4s ease;
+}
+
+.card:hover h2::after {
+  width: 80px;
+}
+
+.card-content {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: var(--text);
+  opacity: 0.9;
+}
+
+.list-item {
+  margin: 0.75rem 0;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  transition: all 0.3s ease;
+  padding: 0.5rem;
+  border-radius: 8px;
+}
+
+.list-item:hover {
+  transform: translateX(8px);
+  background: rgba(129, 140, 248, 0.1);
+}
+
+.list-item::before {
+  content: "•";
+  color: var(--accent);
+  font-size: 1.5em;
+}
+
+.social-links {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: 1.25rem;
+  margin-top: 1.5rem;
+}
+
+.social-link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1.25rem;
+  background: rgba(129, 140, 248, 0.1);
+  color: var(--text);
+  border-radius: 16px;
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.social-link:hover {
+  transform: translateY(-5px);
+  background: var(--accent);
+  color: white;
+  box-shadow: 0 8px 20px rgba(129, 140, 248, 0.3);
+}
+
+.social-link img {
+  width: 28px;
+  height: 28px;
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.social-link:hover img {
+  transform: scale(1.15) rotate(5deg);
+}
+
+.ripple {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.8);
+  transform: scale(0);
+  animation: ripple 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
+}
+
+.highlight {
+  color: var(--accent);
+  font-weight: 600;
+  position: relative;
+  display: inline-block;
+  padding: 0 4px;
+}
+
+.highlight::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-origin: left;
+}
+
+.highlight:hover::after {
+  transform: scaleX(1);
+}
+
+.games-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 1rem;
+  margin-top: 1.5rem;
+  max-width: 100%;
+  padding: 0.5rem;
+}
+
+.game-tag {
+  background: rgba(129, 140, 248, 0.1);
+  padding: 1rem 1.25rem;
+  border-radius: 16px;
+  text-align: center;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  border: 1px solid rgba(129, 140, 248, 0.2);
+  position: relative;
+  overflow: hidden;
+  font-weight: 500;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.game-tag:hover {
+  background: var(--accent);
+  color: white;
+  transform: scale(1.05) translateY(-2px);
+  box-shadow: 0 8px 20px rgba(129, 140, 248, 0.3);
+}
+
+.progress-bar {
+  width: 100%;
+  height: 6px;
+  background: rgba(129, 140, 248, 0.2);
+  border-radius: 3px;
+  margin: 1.25rem 0;
+  overflow: hidden;
+}
+
+.progress {
+  width: 0%;
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent), rgba(129, 140, 248, 0.8));
+  border-radius: 3px;
+  transition: width 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes ripple {
+  to {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+
+@keyframes fadeDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0.6;
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.1);
+    opacity: 0.4;
+  }
+}
+
+@keyframes gradientBG {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 1.5rem;
+  }
+  
+  .card {
+    padding: 2rem;
+  }
+  
+  .header {
+    margin-bottom: 3rem;
+  }
+  
+  .cards-grid {
+    gap: 2rem;
+  }
+  
+  .games-grid {
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 0.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 1rem;
+  }
+  
+  .card {
+    padding: 1.5rem;
+  }
+  
+  .social-links {
+    grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+  }
+  
+  .games-grid {
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 0.5rem;
+  }
+  
+  .game-tag {
+    padding: 0.75rem 1rem;
+    font-size: 0.9rem;
+  }
+}
+</style>
+</head>
+<body>
+    <div class="opening-screen">
+        <button class="open-button">ENTER</button>
+    </div>
+
+    <div class="main-content">
+        <audio id="background-audio" src="Red Light.mp3" loop></audio>
+        <div class="container">
+            <header class="header">
+                <div class="profile-container">
+                    <div class="profile-glow"></div>
+                    <img src="../me mrbean rounded.png" alt="Profile Picture" class="profile-picture">
+                </div>
+                <h1>Zykro</h1>
+                <p>Developer • Gamer • Future Pilot</p>
+            </header>
+            <div class="cards-grid">
+                <div class="card">
+                    <h2>About Me</h2>
+                    <div class="card-content">
+                        <div class="list-item">Age: <span class="highlight">-</span></div>
+                        <div class="list-item">Birthday: <span class="highlight">February 14</span></div>
+                        <div class="list-item">Nationality: <span class="highlight">Maldivian</span></div>
+                        <div class="list-item">Gender: <span class="highlight">Male (Him/Him)</span></div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h2>Interests & Hobbies</h2>
+                    <div class="card-content">
+                        <div class="list-item">Coding</div>
+                        <div class="list-item">Gaming</div>
+                        <div class="list-item">Music</div>
+                        <div class="list-item">Favorite Color: Black</div>
+                        <div class="list-item">Fav Tracks: "Red Light", "1 AM"</div>
+                        <div class="list-item">Fav Artists: Civ, Chase Atlantic, Jack Harlow</div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h2>Gaming Library</h2>
+                    <div class="card-content">
+                        <div class="games-grid">
+                            <a href="https://playvalorant.com/en-us/" target="_blank"><div class="game-tag">Valorant</div></a>
+                            <a href="https://roblox.com/" target="_blank"><div class="game-tag">Roblox</div></a>
+                            <a href="https://www.minecraft.net/en-us" target="_blank"><div class="game-tag">Minecraft</div></a>
+                            <a href="https://www.fortnite.com/" target="_blank"><div class="game-tag">Fortnite</div></a>
+                            <a href="https://www.callofduty.com/" target="_blank"><div class="game-tag">COD</div></a>
+                            <a href="https://genshin.hoyoverse.com/" target="_blank"><div class="game-tag">Genshin Impact</div></a>
+                            <a href="https://www.rocketleague.com/en" target="_blank"><div class="game-tag">Rocket League</div></a>
+                            <a href="https://www.counter-strike.net/" target="_blank"><div class="game-tag">CSGO</div></a>
+                            <a href="https://store.steampowered.com/app/1825160/The_Backrooms/" target="_blank"><div class="game-tag">Backrooms</div></a>
+                            <a href="https://www.flightsimulator.com/" target="_blank"><div class="game-tag">MS Flight Sim</div></a>
+                            <a href="https://zenless.hoyoverse.com/" target="_blank"><div class="game-tag">ZZZ</div></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h2>Dreams & Goals</h2>
+                    <div class="card-content">
+                        <div class="list-item">Become a successful pilot for Lufthansa Air</div>
+                        <div class="list-item">Build financial success and freedom!</div>
+                        <div class="list-item">Continue family fishing business!</div>
+                        <div class="list-item">Start my own businesses!</div>
+                        <div class="list-item">Be a sucessfull fullstack developer with many projects!</div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h2>Connect With Me</h2>
+                    <div class="card-content">
+                        <div class="social-links">
+                            <a href="https://github.com/Inv-Wolve" class="social-link" target="_blank">
+                                <img src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt="GitHub">
+                                <span>GitHub</span>
+                            </a>
+                            <a href="#" class="social-link" target="_blank">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/00/PlayStation_logo.svg/2560px-PlayStation_logo.svg.png" alt="PlayStation">
+                                <span>PS - Invsible_Wolve</span>
+                            </a>
+                            <a href="https://steamcommunity.com/profiles/76561198866500784" class="social-link" target="_blank">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Steam_icon_logo.svg/2048px-Steam_icon_logo.svg.png" alt="Steam">
+                                <span>Steam</span>
+                            </a>
+                            <a href="https://open.spotify.com/user/ob5iatkm0caoersm93w7j3h1q" class="social-link" target="_blank">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/Spotify_logo_without_text.svg/2048px-Spotify_logo_without_text.svg.png" alt="Spotify">
+                                <span>Spotify</span>
+                            </a>
+                            <a href="https://steamcommunity.com/id/SnowyZykro/" class="social-link" target="_blank">
+                                <img src="../Pics/5cb78678a7c7755bf004c14c.png" alt="TikTok">
+                                <span>TikTok</span>
+                            </a>
+                            <a href="https://discord.com/users/795492792176082944" class="social-link" target="_blank">
+                                <img src="https://assets-global.website-files.com/6257adef93867e50d84d30e2/636e0a6a49cf127bf92de1e2_icon_clyde_blurple_RGB.png" alt="Discord">
+                                <span>Discord</span>
+                            </a>
+                            <a href="https://www.twitch.tv/hyped_zykro" class="social-link" target="_blank"> 
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/58/Twitch_font_awesome.svg/1024px-Twitch_font_awesome.svg.png" alt="Twitch">
+                                <span>Twitch</span>
+                            </a>
+                            <a href="https://x.com/HZykro" class="social-link" target="_blank">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/57/X_logo_2023_%28white%29.png/640px-X_logo_2023_%28white%29.png" alt="X">
+                                <span>X</span>
+                            </a>
+                            <a href="#" class="social-link" target="_blank">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/Xbox_one_logo.svg/2048px-Xbox_one_logo.svg.png" alt="Xbox">
+                                <span>Xbox - Wolf14211</span>
+                            </a>
+                            <a href="#" class="social-link" target="_blank">
+                                <img src="../Pics/6095215353a8bf00040ff3a6.png" alt="Riot">
+                                <span>Riot - Zykro#2424</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const openingScreen = document.querySelector('.opening-screen');
+    const mainContent = document.querySelector('.main-content');
+    const openButton = document.querySelector('.open-button');
+    const audio = document.getElementById('background-audio');
+
+    openButton.addEventListener('click', () => {
+        // Start audio
+        audio.volume = 0.5;
+        audio.play().then(() => {
+            console.log("Audio started!");
+            
+            // Hide opening screen
+            openingScreen.classList.add('hidden');
+            
+            // Show main content
+            setTimeout(() => {
+                mainContent.classList.add('visible');
+            }, 300);
+        }).catch(err => {
+            console.error("Audio play failed:", err);
+            // Still proceed with animation even if audio fails
+            openingScreen.classList.add('hidden');
+            setTimeout(() => {
+                mainContent.classList.add('visible');
+            }, 300);
+        });
+    });
+
+    const cards = document.querySelectorAll('.card');
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+            }
+        });
+    }, {
+        threshold: 0.1
+    });
+
+    cards.forEach(card => {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(20px)';
+        observer.observe(card);
+    });
+
+    const gameTags = document.querySelectorAll('.game-tag');
+    gameTags.forEach(tag => {
+        tag.addEventListener('mouseover', () => {
+            tag.style.transform = 'scale(1.05)';
+        });
+        tag.addEventListener('mouseout', () => {
+            tag.style.transform = 'scale(1)';
+        });
+    });
+
+    const socialLinks = document.querySelectorAll('.social-link');
+    socialLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            const ripple = document.createElement('div');
+            ripple.classList.add('ripple');
+            this.appendChild(ripple);
+            
+            const rect = this.getBoundingClientRect();
+            const size = Math.max(rect.width, rect.height);
+            
+            ripple.style.width = ripple.style.height = `${size}px`;
+            ripple.style.left = `${e.clientX - rect.left - size/2}px`;
+            ripple.style.top = `${e.clientY - rect.top - size/2}px`;
+            
+            ripple.addEventListener('animationend', () => {
+                ripple.remove();
+            });
+        });
+    });
+});
+</script>
+</body>
+</html>

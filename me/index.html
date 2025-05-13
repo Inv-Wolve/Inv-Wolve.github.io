@@ -1,770 +1,662 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Zykro's Profile</title>
-    <link rel="icon" type="image/x-icon" href="../me mrbean rounded.png">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-<style>
-    @tailwind base;
-@tailwind components;
-@tailwind utilities;
+    <link rel="icon" href="../me mrbean rounded.png" type="image/png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="styles/variables.css" />
+    <link rel="stylesheet" href="styles/main.css" />
+    <link rel="stylesheet" href="styles/components.css" />
+    <link rel="stylesheet" href="styles/animations.css" />
+    <link rel="stylesheet" href="styles/responsive.css" />
+  </head>
+  <body>
+    <div id="particles-js"></div>
+    <div class="cursor-dot-outline"></div>
+    <div class="cursor-dot"></div>
 
-:root {
-  --primary: #f0f4ff;
-  --secondary: #e0e7ff;
-  --accent: #818cf8;
-  --text: #1e293b;
-  --card-bg: rgba(255, 255, 255, 0.95);
-  font-family: "Poppins", system-ui, sans-serif;
-}
+    <div class="theme-switch">
+      <div class="theme-switch-toggle">
+        <i class="fas fa-palette"></i>
+      </div>
+      <div class="theme-options">
+        <button class="theme-btn default-theme" data-theme="default"></button>
+        <button class="theme-btn purple-theme" data-theme="purple"></button>
+        <button class="theme-btn blue-theme" data-theme="blue"></button>
+        <button class="theme-btn green-theme" data-theme="green"></button>
+        <button class="theme-btn dark-theme" data-theme="dark"></button>
+      </div>
+    </div>
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+    <div class="loading-screen">
+      <div class="loading-animation">
+        <div class="dot-pulse"></div>
+      </div>
+      <div class="loading-text">Loading Experience</div>
+      <div class="loading-bar-container">
+        <div class="loading-bar"></div>
+      </div>
+    </div>
 
-/* Opening screen styles */
-.opening-screen {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(135deg, var(--primary), var(--secondary));
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-  transition: opacity 1s ease-out;
-}
-
-.open-button {
-  background: var(--accent);
-  color: white;
-  border: none;
-  padding: 1.5rem 3.5rem;
-  font-size: 1.5rem;
-  border-radius: 50px;
-  cursor: pointer;
-  font-family: "Poppins", system-ui, sans-serif;
-  font-weight: 600;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 10px 25px rgba(129, 140, 248, 0.5);
-  position: relative;
-  overflow: hidden;
-}
-
-.open-button:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 15px 35px rgba(129, 140, 248, 0.6);
-}
-
-.open-button:active {
-  transform: scale(0.95);
-}
-
-.main-content {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 1s ease-out, transform 1s ease-out;
-  pointer-events: none;
-}
-
-.main-content.visible {
-  opacity: 1;
-  transform: translateY(0);
-  pointer-events: all;
-}
-
-.hidden {
-  opacity: 0;
-  pointer-events: none;
-}
-
-body {
-  background: linear-gradient(135deg, var(--primary), var(--secondary));
-  color: var(--text);
-  min-height: 100vh;
-  line-height: 1.6;
-  background-attachment: fixed;
-  background-size: 400% 400%;
-  animation: gradientBG 15s ease infinite;
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 2rem;
-}
-
-.header {
-  text-align: center;
-  margin-bottom: 4rem;
-  animation: fadeDown 1s ease-out;
-  position: relative;
-}
-
-.profile-container {
-  position: relative;
-  width: 200px;
-  height: 200px;
-  margin: 0 auto 2rem;
-  animation: float 6s ease-in-out infinite;
-}
-
-.profile-picture {
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 4px solid var(--accent);
-  box-shadow: 0 0 30px rgba(129, 140, 248, 0.4);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.profile-picture:hover {
-  transform: scale(1.05);
-  box-shadow: 0 0 40px rgba(129, 140, 248, 0.6);
-}
-
-.profile-glow {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 220px;
-  height: 220px;
-  background: radial-gradient(
-    circle,
-    rgba(129, 140, 248, 0.3) 0%,
-    transparent 70%
-  );
-  border-radius: 50%;
-  animation: pulse 2s ease-in-out infinite;
-}
-
-.header::after {
-  content: "";
-  position: absolute;
-  bottom: -1rem;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 120px;
-  height: 3px;
-  background: linear-gradient(90deg, transparent, var(--accent), transparent);
-  border-radius: 2px;
-}
-
-.header h1 {
-  font-size: clamp(2.5rem, 5vw, 3.5rem);
-  color: var(--accent);
-  margin-bottom: 1rem;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
-  letter-spacing: -0.5px;
-}
-
-.header p {
-  font-size: clamp(1rem, 2vw, 1.2rem);
-  opacity: 0.9;
-  letter-spacing: 0.5px;
-  max-width: 600px;
-  margin: 0 auto;
-}
-
-.music-player {
-  background: var(--card-bg);
-  padding: 2rem;
-  border-radius: 24px;
-  margin: 2rem auto;
-  max-width: 400px;
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
-  text-align: center;
-  animation: fadeUp 1s ease-out;
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-.music-player h3 {
-  color: var(--accent);
-  margin-bottom: 1.5rem;
-  font-size: 1.25rem;
-}
-
-.music-controls {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 1.5rem;
-  margin-top: 1.5rem;
-}
-
-.play-button {
-  background: var(--accent);
-  color: white;
-  border: none;
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 5px 15px rgba(129, 140, 248, 0.4);
-}
-
-.play-button:hover {
-  transform: scale(1.1) translateY(-2px);
-  box-shadow: 0 8px 25px rgba(129, 140, 248, 0.5);
-}
-
-.play-button:active {
-  transform: scale(0.95);
-}
-
-.cards-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 500px), 1fr));
-  gap: 2.5rem;
-  padding: 1rem;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-.card {
-  background: var(--card-bg);
-  border-radius: 24px;
-  padding: 2.5rem;
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  animation: fadeUp 1s ease-out;
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  position: relative;
-  overflow: hidden;
-}
-
-.card::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(
-    45deg,
-    transparent,
-    rgba(129, 140, 248, 0.15),
-    transparent
-  );
-  transform: translateX(-100%);
-  transition: transform 0.8s ease;
-}
-
-.card:hover::before {
-  transform: translateX(100%);
-}
-
-.card:hover {
-  transform: translateY(-12px);
-  box-shadow: 0 20px 45px rgba(129, 140, 248, 0.25);
-}
-
-.card h2 {
-  color: var(--accent);
-  margin-bottom: 1.5rem;
-  font-size: 1.75rem;
-  position: relative;
-  padding-bottom: 0.75rem;
-  letter-spacing: -0.5px;
-}
-
-.card h2::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 50px;
-  height: 3px;
-  background: linear-gradient(90deg, var(--accent), transparent);
-  border-radius: 2px;
-  transition: width 0.4s ease;
-}
-
-.card:hover h2::after {
-  width: 80px;
-}
-
-.card-content {
-  font-size: 1.1rem;
-  line-height: 1.7;
-  color: var(--text);
-  opacity: 0.9;
-}
-
-.list-item {
-  margin: 0.75rem 0;
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  transition: all 0.3s ease;
-  padding: 0.5rem;
-  border-radius: 8px;
-}
-
-.list-item:hover {
-  transform: translateX(8px);
-  background: rgba(129, 140, 248, 0.1);
-}
-
-.list-item::before {
-  content: "•";
-  color: var(--accent);
-  font-size: 1.5em;
-}
-
-.social-links {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-  gap: 1.25rem;
-  margin-top: 1.5rem;
-}
-
-.social-link {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.75rem;
-  padding: 1.25rem;
-  background: rgba(129, 140, 248, 0.1);
-  color: var(--text);
-  border-radius: 16px;
-  text-decoration: none;
-  font-size: 0.9rem;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  position: relative;
-  overflow: hidden;
-}
-
-.social-link:hover {
-  transform: translateY(-5px);
-  background: var(--accent);
-  color: white;
-  box-shadow: 0 8px 20px rgba(129, 140, 248, 0.3);
-}
-
-.social-link img {
-  width: 28px;
-  height: 28px;
-  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.social-link:hover img {
-  transform: scale(1.15) rotate(5deg);
-}
-
-.ripple {
-  position: absolute;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.8);
-  transform: scale(0);
-  animation: ripple 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-  pointer-events: none;
-}
-
-.highlight {
-  color: var(--accent);
-  font-weight: 600;
-  position: relative;
-  display: inline-block;
-  padding: 0 4px;
-}
-
-.highlight::after {
-  content: "";
-  position: absolute;
-  bottom: -2px;
-  left: 0;
-  width: 100%;
-  height: 2px;
-  background: var(--accent);
-  transform: scaleX(0);
-  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  transform-origin: left;
-}
-
-.highlight:hover::after {
-  transform: scaleX(1);
-}
-
-.games-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-  gap: 1rem;
-  margin-top: 1.5rem;
-  max-width: 100%;
-  padding: 0.5rem;
-}
-
-.game-tag {
-  background: rgba(129, 140, 248, 0.1);
-  padding: 1rem 1.25rem;
-  border-radius: 16px;
-  text-align: center;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  cursor: pointer;
-  border: 1px solid rgba(129, 140, 248, 0.2);
-  position: relative;
-  overflow: hidden;
-  font-weight: 500;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  overflow: hidden;
-}
-
-.game-tag:hover {
-  background: var(--accent);
-  color: white;
-  transform: scale(1.05) translateY(-2px);
-  box-shadow: 0 8px 20px rgba(129, 140, 248, 0.3);
-}
-
-.progress-bar {
-  width: 100%;
-  height: 6px;
-  background: rgba(129, 140, 248, 0.2);
-  border-radius: 3px;
-  margin: 1.25rem 0;
-  overflow: hidden;
-}
-
-.progress {
-  width: 0%;
-  height: 100%;
-  background: linear-gradient(90deg, var(--accent), rgba(129, 140, 248, 0.8));
-  border-radius: 3px;
-  transition: width 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-@keyframes ripple {
-  to {
-    transform: scale(4);
-    opacity: 0;
-  }
-}
-
-@keyframes fadeDown {
-  from {
-    opacity: 0;
-    transform: translateY(-30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes fadeUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes float {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-12px);
-  }
-}
-
-@keyframes pulse {
-  0%, 100% {
-    transform: translate(-50%, -50%) scale(1);
-    opacity: 0.6;
-  }
-  50% {
-    transform: translate(-50%, -50%) scale(1.1);
-    opacity: 0.4;
-  }
-}
-
-@keyframes gradientBG {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
-}
-
-@media (max-width: 768px) {
-  .container {
-    padding: 1.5rem;
-  }
-  
-  .card {
-    padding: 2rem;
-  }
-  
-  .header {
-    margin-bottom: 3rem;
-  }
-  
-  .cards-grid {
-    gap: 2rem;
-  }
-  
-  .games-grid {
-    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-    gap: 0.75rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .container {
-    padding: 1rem;
-  }
-  
-  .card {
-    padding: 1.5rem;
-  }
-  
-  .social-links {
-    grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
-  }
-  
-  .games-grid {
-    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-    gap: 0.5rem;
-  }
-  
-  .game-tag {
-    padding: 0.75rem 1rem;
-    font-size: 0.9rem;
-  }
-}
-</style>
-</head>
-<body>
     <div class="opening-screen">
-        <button class="open-button">ENTER</button>
+      <div class="logo-container">
+        <div class="logo-text">ZYKRO</div>
+        <div class="logo-subtitle">Developer • Gamer • Future Pilot</div>
+      </div>
+      <button class="enter-button">
+        <span>ENTER</span>
+        <div class="button-decoration"></div>
+      </button>
     </div>
 
     <div class="main-content">
-        <audio id="background-audio" src="Red Light.mp3" loop></audio>
-        <div class="container">
-            <header class="header">
-                <div class="profile-container">
-                    <div class="profile-glow"></div>
-                    <img src="../me mrbean rounded.png" alt="Profile Picture" class="profile-picture">
-                </div>
-                <h1>Zykro</h1>
-                <p>Developer • Gamer • Future Pilot</p>
-            </header>
-            <div class="cards-grid">
-                <div class="card">
-                    <h2>About Me</h2>
-                    <div class="card-content">
-                        <div class="list-item">Age: <span class="highlight">-</span></div>
-                        <div class="list-item">Birthday: <span class="highlight">February 14</span></div>
-                        <div class="list-item">Nationality: <span class="highlight">Maldivian</span></div>
-                        <div class="list-item">Gender: <span class="highlight">Male (Him/Him)</span></div>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <h2>Interests & Hobbies</h2>
-                    <div class="card-content">
-                        <div class="list-item">Coding</div>
-                        <div class="list-item">Gaming</div>
-                        <div class="list-item">Music</div>
-                        <div class="list-item">Favorite Color: Black</div>
-                        <div class="list-item">Fav Tracks: "Red Light", "1 AM"</div>
-                        <div class="list-item">Fav Artists: Civ, Chase Atlantic, Jack Harlow</div>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <h2>Gaming Library</h2>
-                    <div class="card-content">
-                        <div class="games-grid">
-                            <a href="https://playvalorant.com/en-us/" target="_blank"><div class="game-tag">Valorant</div></a>
-                            <a href="https://roblox.com/" target="_blank"><div class="game-tag">Roblox</div></a>
-                            <a href="https://www.minecraft.net/en-us" target="_blank"><div class="game-tag">Minecraft</div></a>
-                            <a href="https://www.fortnite.com/" target="_blank"><div class="game-tag">Fortnite</div></a>
-                            <a href="https://www.callofduty.com/" target="_blank"><div class="game-tag">COD</div></a>
-                            <a href="https://genshin.hoyoverse.com/" target="_blank"><div class="game-tag">Genshin Impact</div></a>
-                            <a href="https://www.rocketleague.com/en" target="_blank"><div class="game-tag">Rocket League</div></a>
-                            <a href="https://www.counter-strike.net/" target="_blank"><div class="game-tag">CSGO</div></a>
-                            <a href="https://store.steampowered.com/app/1825160/The_Backrooms/" target="_blank"><div class="game-tag">Backrooms</div></a>
-                            <a href="https://www.flightsimulator.com/" target="_blank"><div class="game-tag">MS Flight Sim</div></a>
-                            <a href="https://zenless.hoyoverse.com/" target="_blank"><div class="game-tag">ZZZ</div></a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <h2>Dreams & Goals</h2>
-                    <div class="card-content">
-                        <div class="list-item">Become a successful pilot for Lufthansa Air</div>
-                        <div class="list-item">Build financial success and freedom!</div>
-                        <div class="list-item">Continue family fishing business!</div>
-                        <div class="list-item">Start my own businesses!</div>
-                        <div class="list-item">Be a sucessfull fullstack developer with many projects!</div>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <h2>Connect With Me</h2>
-                    <div class="card-content">
-                        <div class="social-links">
-                            <a href="https://github.com/Inv-Wolve" class="social-link" target="_blank">
-                                <img src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt="GitHub">
-                                <span>GitHub</span>
-                            </a>
-                            <a href="#" class="social-link" target="_blank">
-                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/00/PlayStation_logo.svg/2560px-PlayStation_logo.svg.png" alt="PlayStation">
-                                <span>PS - Invsible_Wolve</span>
-                            </a>
-                            <a href="https://steamcommunity.com/profiles/76561198866500784" class="social-link" target="_blank">
-                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Steam_icon_logo.svg/2048px-Steam_icon_logo.svg.png" alt="Steam">
-                                <span>Steam</span>
-                            </a>
-                            <a href="https://open.spotify.com/user/ob5iatkm0caoersm93w7j3h1q" class="social-link" target="_blank">
-                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/Spotify_logo_without_text.svg/2048px-Spotify_logo_without_text.svg.png" alt="Spotify">
-                                <span>Spotify</span>
-                            </a>
-                            <a href="https://steamcommunity.com/id/SnowyZykro/" class="social-link" target="_blank">
-                                <img src="../Pics/5cb78678a7c7755bf004c14c.png" alt="TikTok">
-                                <span>TikTok</span>
-                            </a>
-                            <a href="https://discord.com/users/795492792176082944" class="social-link" target="_blank">
-                                <img src="https://assets-global.website-files.com/6257adef93867e50d84d30e2/636e0a6a49cf127bf92de1e2_icon_clyde_blurple_RGB.png" alt="Discord">
-                                <span>Discord</span>
-                            </a>
-                            <a href="https://www.twitch.tv/hyped_zykro" class="social-link" target="_blank"> 
-                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/58/Twitch_font_awesome.svg/1024px-Twitch_font_awesome.svg.png" alt="Twitch">
-                                <span>Twitch</span>
-                            </a>
-                            <a href="https://x.com/HZykro" class="social-link" target="_blank">
-                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/57/X_logo_2023_%28white%29.png/640px-X_logo_2023_%28white%29.png" alt="X">
-                                <span>X</span>
-                            </a>
-                            <a href="#" class="social-link" target="_blank">
-                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/Xbox_one_logo.svg/2048px-Xbox_one_logo.svg.png" alt="Xbox">
-                                <span>Xbox - Wolf14211</span>
-                            </a>
-                            <a href="#" class="social-link" target="_blank">
-                                <img src="../Pics/6095215353a8bf00040ff3a6.png" alt="Riot">
-                                <span>Riot - Zykro#2424</span>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+      <div class="audio-player">
+        <button class="toggle-audio">
+          <i class="fas fa-play"></i>
+          <i class="fas fa-pause"></i>
+        </button>
+        <div class="track-info">
+          <div class="track-name">Red Light</div>
+          <div class="track-artist">Playing Now</div>
         </div>
+        <div class="visualizer-container">
+          <canvas id="audio-visualizer"></canvas>
+        </div>
+        <div class="volume-control">
+          <i class="fas fa-volume-up"></i>
+          <input
+            type="range"
+            class="volume-slider"
+            min="0"
+            max="100"
+            value="50"
+          />
+        </div>
+      </div>
+
+      <div class="scroll-indicator">
+        <div class="mouse">
+          <div class="wheel"></div>
+        </div>
+        <div class="scroll-text">Scroll Down</div>
+      </div>
+
+      <header class="hero-section">
+        <div class="profile-container parallax-item" data-depth="0.2">
+          <div class="profile-glow"></div>
+          <img
+            src="../me mrbean rounded.png"
+            alt="Profile Picture"
+            class="profile-picture"
+          />
+          <div class="profile-ring"></div>
+        </div>
+        <h1 class="hero-title parallax-item" data-depth="0.1">Zykro</h1>
+        <p class="hero-subtitle typing-text">
+          Developer • Gamer • Future Pilot
+        </p>
+
+        <div class="hero-scroll-indicator">
+          <div class="chevron"></div>
+          <div class="chevron"></div>
+          <div class="chevron"></div>
+        </div>
+      </header>
+
+      <main class="content-container">
+        <section class="about-section" id="about">
+          <div class="section-title reveal-element">
+            <span class="section-number">01</span>
+            <h2>About Me</h2>
+            <div class="section-line"></div>
+          </div>
+
+          <div class="cards-grid">
+            <div class="card tilt-card reveal-element">
+              <div class="card-content">
+                <h3>Personal Info</h3>
+                <div class="info-list">
+                  <div
+                    class="info-item"
+                    data-aos="fade-right"
+                    data-aos-delay="100"
+                  >
+                    <span class="info-label">Birthday:</span>
+                    <span class="info-value">February 14</span>
+                  </div>
+                  <div
+                    class="info-item"
+                    data-aos="fade-right"
+                    data-aos-delay="200"
+                  >
+                    <span class="info-label">Nationality:</span>
+                    <span class="info-value">Maldivian</span>
+                  </div>
+                  <div
+                    class="info-item"
+                    data-aos="fade-right"
+                    data-aos-delay="300"
+                  >
+                    <span class="info-label">Gender:</span>
+                    <span class="info-value">Male (Him/Him)</span>
+                  </div>
+                </div>
+              </div>
+              <div class="card-bg"></div>
+            </div>
+
+            <div class="card tilt-card reveal-element">
+              <div class="card-content">
+                <h3>Interests & Hobbies</h3>
+                <div class="tags-container">
+                  <span class="tag">Coding</span>
+                  <span class="tag">Gaming</span>
+                  <span class="tag">Music</span>
+                  <span class="tag">Aviation</span>
+                  <span class="tag">Black (Favorite Color)</span>
+                </div>
+                <h4 class="music-title">Favorite Music</h4>
+                <div class="music-items">
+                  <div class="music-item">
+                    <i class="fas fa-music"></i>
+                    <span>Red Light, 1 AM</span>
+                  </div>
+                  <div class="music-item">
+                    <i class="fas fa-user"></i>
+                    <span>Civ, Chase Atlantic, Jack Harlow</span>
+                  </div>
+                </div>
+              </div>
+              <div class="card-bg"></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="skills-section" id="skills">
+          <div class="section-title reveal-element">
+            <span class="section-number">02</span>
+            <h2>My Skills</h2>
+            <div class="section-line"></div>
+          </div>
+
+          <div class="skills-container reveal-element">
+            <div class="skill-item">
+              <div class="skill-header">
+                <h3 class="skill-title">Gaming</h3>
+                <span class="skill-percentage" data-value="70">70%</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-progress" data-progress="70"></div>
+              </div>
+            </div>
+
+            <div class="skill-item">
+              <div class="skill-header">
+                <h3 class="skill-title">Coding</h3>
+                <span class="skill-percentage" data-value="95">95%</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-progress" data-progress="95"></div>
+              </div>
+            </div>
+
+            <div class="skill-item">
+              <div class="skill-header">
+                <h3 class="skill-title">Aviation</h3>
+                <span class="skill-percentage" data-value="80">80%</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-progress" data-progress="80"></div>
+              </div>
+            </div>
+
+            <div class="skill-item">
+              <div class="skill-header">
+                <h3 class="skill-title">Music</h3>
+                <span class="skill-percentage" data-value="90">90%</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-progress" data-progress="90"></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="games-section" id="games">
+          <div class="section-title reveal-element">
+            <span class="section-number">03</span>
+            <h2>Gaming Library</h2>
+            <div class="section-line"></div>
+          </div>
+
+          <div class="games-grid reveal-element">
+            <div class="game-card" data-game="valorant">
+              <div class="game-card-inner">
+                <div class="game-card-front">
+                  <div class="game-card-overlay"></div>
+                  <img
+                    src="data:image/jpeg;base64,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"
+                    alt="Valorant"
+                    class="game-image"
+                  />
+                  <h3 class="game-title">Valorant</h3>
+                </div>
+                <div class="game-card-back">
+                  <h3>Valorant</h3>
+                  <p>Tactical shooter game developed by Riot Games</p>
+                  <a
+                    href="https://playvalorant.com/"
+                    target="_blank"
+                    class="game-link"
+                  >
+                    <i class="fas fa-external-link-alt"></i> Visit Website
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <div class="game-card" data-game="minecraft">
+              <div class="game-card-inner">
+                <div class="game-card-front">
+                  <div class="game-card-overlay"></div>
+                  <img
+                    src="data:image/jpeg;base64,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"
+                    alt="Minecraft"
+                    class="game-image"
+                  />
+                  <h3 class="game-title">Minecraft</h3>
+                </div>
+                <div class="game-card-back">
+                  <h3>Minecraft</h3>
+                  <p>Sandbox game focused on creativity and building</p>
+                  <a
+                    href="https://www.minecraft.net/"
+                    target="_blank"
+                    class="game-link"
+                  >
+                    <i class="fas fa-external-link-alt"></i> Visit Website
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <div class="game-card" data-game="fortnite">
+              <div class="game-card-inner">
+                <div class="game-card-front">
+                  <div class="game-card-overlay"></div>
+                  <img
+                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQsx12uKc55M0WufSsWCpBS68mYHU8lD2DLJA&s"
+                    alt="Fortnite"
+                    class="game-image"
+                  />
+                  <h3 class="game-title">Fortnite</h3>
+                </div>
+                <div class="game-card-back">
+                  <h3>Fortnite</h3>
+                  <p>Popular battle royale game by Epic Games</p>
+                  <a
+                    href="https://www.fortnite.com/"
+                    target="_blank"
+                    class="game-link"
+                  >
+                    <i class="fas fa-external-link-alt"></i> Visit Website
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <div class="game-card" data-game="flightsim">
+              <div class="game-card-inner">
+                <div class="game-card-front">
+                  <div class="game-card-overlay"></div>
+                  <img
+                    src="https://images.pexels.com/photos/46148/aircraft-jet-landing-cloud-46148.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+                    alt="MS Flight Simulator"
+                    class="game-image"
+                  />
+                  <h3 class="game-title">MS Flight Sim</h3>
+                </div>
+                <div class="game-card-back">
+                  <h3>Microsoft Flight Simulator</h3>
+                  <p>Ultra-realistic flight simulator</p>
+                  <a
+                    href="https://www.flightsimulator.com/"
+                    target="_blank"
+                    class="game-link"
+                  >
+                    <i class="fas fa-external-link-alt"></i> Visit Website
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <div class="view-more-games">
+              <button class="view-more-btn">
+                <span>View All Games</span>
+                <i class="fas fa-chevron-right"></i>
+              </button>
+            </div>
+          </div>
+
+          <div class="games-popup">
+            <div class="games-popup-content">
+              <button class="close-popup"><i class="fas fa-times"></i></button>
+              <h3>All Games</h3>
+              <div class="games-list">
+                <a
+                  href="https://playvalorant.com/"
+                  target="_blank"
+                  class="game-item"
+                  >Valorant</a
+                >
+                <a
+                  href="https://www.roblox.com/"
+                  target="_blank"
+                  class="game-item"
+                  >Roblox</a
+                >
+                <a
+                  href="https://www.minecraft.net/"
+                  target="_blank"
+                  class="game-item"
+                  >Minecraft</a
+                >
+                <a
+                  href="https://www.fortnite.com/"
+                  target="_blank"
+                  class="game-item"
+                  >Fortnite</a
+                >
+                <a
+                  href="https://www.callofduty.com/"
+                  target="_blank"
+                  class="game-item"
+                  >COD</a
+                >
+                <a
+                  href="https://genshin.hoyoverse.com/"
+                  target="_blank"
+                  class="game-item"
+                  >Genshin Impact</a
+                >
+                <a
+                  href="https://www.rocketleague.com/"
+                  target="_blank"
+                  class="game-item"
+                  >Rocket League</a
+                >
+                <a
+                  href="https://www.counter-strike.net/"
+                  target="_blank"
+                  class="game-item"
+                  >CSGO</a
+                >
+                <a
+                  href="https://store.steampowered.com/app/1825160/The_Backrooms/"
+                  target="_blank"
+                  class="game-item"
+                  >Backrooms</a
+                >
+                <a
+                  href="https://www.flightsimulator.com/"
+                  target="_blank"
+                  class="game-item"
+                  >MS Flight Sim</a
+                >
+                <a
+                  href="https://zenless.hoyoverse.com/"
+                  target="_blank"
+                  class="game-item"
+                  >ZZZ</a
+                >
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="dreams-section" id="dreams">
+          <div class="section-title reveal-element">
+            <span class="section-number">04</span>
+            <h2>Dreams & Goals</h2>
+            <div class="section-line"></div>
+          </div>
+
+          <div class="dreams-container reveal-element">
+            <div class="dream-card">
+              <div class="dream-icon">
+                <i class="fas fa-plane"></i>
+              </div>
+              <h3>Become a Pilot</h3>
+              <p>Become a successful pilot for Lufthansa Air</p>
+            </div>
+
+            <div class="dream-card">
+              <div class="dream-icon">
+                <i class="fas fa-coins"></i>
+              </div>
+              <h3>Financial Freedom</h3>
+              <p>Build financial success and freedom!</p>
+            </div>
+
+            <div class="dream-card">
+              <div class="dream-icon">
+                <i class="fas fa-fish"></i>
+              </div>
+              <h3>Family Business</h3>
+              <p>Continue family fishing business!</p>
+            </div>
+
+            <div class="dream-card">
+              <div class="dream-icon">
+                <i class="fas fa-store"></i>
+              </div>
+              <h3>Entrepreneur</h3>
+              <p>Start my own businesses!</p>
+            </div>
+
+            <div class="dream-card">
+              <div class="dream-icon">
+                <i class="fas fa-laptop-code"></i>
+              </div>
+              <h3>Developer</h3>
+              <p>Be a successful fullstack developer with many projects!</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="connect-section" id="connect">
+          <div class="section-title reveal-element">
+            <span class="section-number">05</span>
+            <h2>Connect With Me</h2>
+            <div class="section-line"></div>
+          </div>
+
+          <div class="social-grid reveal-element">
+            <a
+              href="https://github.com/Inv-Wolve"
+              target="_blank"
+              class="social-card"
+              data-platform="github"
+            >
+              <div class="social-icon">
+                <i class="fab fa-github"></i>
+              </div>
+              <div class="social-info">
+                <h3>GitHub</h3>
+                <p>Inv-Wolve</p>
+              </div>
+              <div class="social-hover">
+                <span>Visit Profile</span>
+              </div>
+            </a>
+
+            <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" class="social-card" data-platform="playstation">
+              <div class="social-icon">
+                <i class="fab fa-playstation"></i>
+              </div>
+              <div class="social-info">
+                <h3>PlayStation</h3>
+                <p>Invsible_Wolve</p>
+              </div>
+              <div class="social-hover">
+                <span>Add Friend</span>
+              </div>
+            </a>
+
+            <a
+              href="https://steamcommunity.com/profiles/76561198866500784"
+              target="_blank"
+              class="social-card"
+              data-platform="steam"
+            >
+              <div class="social-icon">
+                <i class="fab fa-steam"></i>
+              </div>
+              <div class="social-info">
+                <h3>Steam</h3>
+                <p>Zykro</p>
+              </div>
+              <div class="social-hover">
+                <span>Visit Profile</span>
+              </div>
+            </a>
+
+            <a
+              href="https://open.spotify.com/user/ob5iatkm0caoersm93w7j3h1q"
+              target="_blank"
+              class="social-card"
+              data-platform="spotify"
+            >
+              <div class="social-icon">
+                <i class="fab fa-spotify"></i>
+              </div>
+              <div class="social-info">
+                <h3>Spotify</h3>
+                <p>Zykro</p>
+              </div>
+              <div class="social-hover">
+                <span>Listen Together</span>
+              </div>
+            </a>
+          </div>
+
+          <div class="more-social-links reveal-element">
+            <button class="more-social-btn">
+              <span>this button coming soon :3</span>
+              <i class="fas fa-plus"></i>
+            </button>
+          </div>
+
+          <div class="social-popup">
+            <div class="social-popup-content">
+              <button class="close-social-popup">
+                <i class="fas fa-times"></i>
+              </button>
+              <h3>All Social Links</h3>
+              <div class="social-links-grid">
+                <a
+                  href="https://github.com/Inv-Wolve"
+                  target="_blank"
+                  class="social-link-item"
+                >
+                  <i class="fab fa-github"></i>
+                  <span>GitHub</span>
+                </a>
+                <a href="#" class="social-link-item">
+                  <i class="fab fa-playstation"></i>
+                  <span>PlayStation - Invsible_Wolve</span>
+                </a>
+                <a
+                  href="https://steamcommunity.com/profiles/76561198866500784"
+                  target="_blank"
+                  class="social-link-item"
+                >
+                  <i class="fab fa-steam"></i>
+                  <span>Steam</span>
+                </a>
+                <a
+                  href="https://open.spotify.com/user/ob5iatkm0caoersm93w7j3h1q"
+                  target="_blank"
+                  class="social-link-item"
+                >
+                  <i class="fab fa-spotify"></i>
+                  <span>Spotify</span>
+                </a>
+                <a href="#" class="social-link-item">
+                  <i class="fab fa-tiktok"></i>
+                  <span>TikTok</span>
+                </a>
+                <a
+                  href="https://discord.com/users/795492792176082944"
+                  target="_blank"
+                  class="social-link-item"
+                >
+                  <i class="fab fa-discord"></i>
+                  <span>Discord</span>
+                </a>
+                <a
+                  href="https://www.twitch.tv/hyped_zykro"
+                  target="_blank"
+                  class="social-link-item"
+                >
+                  <i class="fab fa-twitch"></i>
+                  <span>Twitch</span>
+                </a>
+                <a
+                  href="https://x.com/HZykro"
+                  target="_blank"
+                  class="social-link-item"
+                >
+                  <i class="fab fa-twitter"></i>
+                  <span>X/Twitter</span>
+                </a>
+                <a href="#" class="social-link-item">
+                  <i class="fab fa-xbox"></i>
+                  <span>Xbox - Wolf14211</span>
+                </a>
+                <a href="#" class="social-link-item">
+                  <i class="fas fa-gamepad"></i>
+                  <span>Riot - Zykro#2424</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer class="footer">
+        <div class="footer-content">
+          <div class="footer-logo">ZYKRO</div>
+          <div class="footer-text">
+            © 2025 | All Rights Reserved. Or are they?
+          </div>
+        </div>
+
+        <button class="back-to-top">
+          <i class="fas fa-chevron-up"></i>
+        </button>
+      </footer>
     </div>
 
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-    const openingScreen = document.querySelector('.opening-screen');
-    const mainContent = document.querySelector('.main-content');
-    const openButton = document.querySelector('.open-button');
-    const audio = document.getElementById('background-audio');
+    <audio id="background-audio" src="Red Light.mp3" loop></audio>
 
-    openButton.addEventListener('click', () => {
-        // Start audio
-        audio.volume = 0.5;
-        audio.play().then(() => {
-            console.log("Audio started!");
-            
-            // Hide opening screen
-            openingScreen.classList.add('hidden');
-            
-            // Show main content
-            setTimeout(() => {
-                mainContent.classList.add('visible');
-            }, 300);
-        }).catch(err => {
-            console.error("Audio play failed:", err);
-            // Still proceed with animation even if audio fails
-            openingScreen.classList.add('hidden');
-            setTimeout(() => {
-                mainContent.classList.add('visible');
-            }, 300);
-        });
-    });
-
-    const cards = document.querySelectorAll('.card');
-    
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateY(0)';
-            }
-        });
-    }, {
-        threshold: 0.1
-    });
-
-    cards.forEach(card => {
-        card.style.opacity = '0';
-        card.style.transform = 'translateY(20px)';
-        observer.observe(card);
-    });
-
-    const gameTags = document.querySelectorAll('.game-tag');
-    gameTags.forEach(tag => {
-        tag.addEventListener('mouseover', () => {
-            tag.style.transform = 'scale(1.05)';
-        });
-        tag.addEventListener('mouseout', () => {
-            tag.style.transform = 'scale(1)';
-        });
-    });
-
-    const socialLinks = document.querySelectorAll('.social-link');
-    socialLinks.forEach(link => {
-        link.addEventListener('click', function(e) {
-            const ripple = document.createElement('div');
-            ripple.classList.add('ripple');
-            this.appendChild(ripple);
-            
-            const rect = this.getBoundingClientRect();
-            const size = Math.max(rect.width, rect.height);
-            
-            ripple.style.width = ripple.style.height = `${size}px`;
-            ripple.style.left = `${e.clientX - rect.left - size/2}px`;
-            ripple.style.top = `${e.clientY - rect.top - size/2}px`;
-            
-            ripple.addEventListener('animationend', () => {
-                ripple.remove();
-            });
-        });
-    });
-});
-</script>
-</body>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanilla-tilt@1.8.0/dist/vanilla-tilt.min.js"></script>
+    <script src="js/variables.js"></script>
+    <script src="js/particles.js"></script>
+    <script src="js/audio.js"></script>
+    <script src="js/animations.js"></script>
+    <script src="js/main.js"></script>
+  </body>
 </html>

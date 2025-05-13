@@ -1,0 +1,281 @@
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-15px);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.6;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.4;
+  }
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes gradientBG {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes ripple {
+  to {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+
+@keyframes mouse-wheel {
+  0% {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(15px);
+  }
+}
+
+@keyframes move-chevron {
+  25% {
+    opacity: 1;
+  }
+  33.3% {
+    opacity: 1;
+    transform: translateY(10px);
+  }
+  66.6% {
+    opacity: 1;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(30px) scale(0.5);
+  }
+}
+
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+@keyframes blink {
+  50% {
+    border-color: transparent;
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in-right {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes dot-pulse {
+  0% {
+    box-shadow: 9999px 0 0 -5px var(--primary-color);
+  }
+  30% {
+    box-shadow: 9999px 0 0 2px var(--primary-color);
+  }
+  60%, 100% {
+    box-shadow: 9999px 0 0 -5px var(--primary-color);
+  }
+}
+
+.profile-container {
+  animation: float 6s ease-in-out infinite;
+}
+
+.profile-glow {
+  animation: pulse 4s ease-in-out infinite;
+}
+
+.typing-text {
+  position: relative;
+  overflow: hidden;
+  white-space: nowrap;
+  border-right: 3px solid var(--primary-color);
+  width: 0;
+  animation: typing 3.5s steps(40, end) 1s forwards, blink 0.75s step-end infinite;
+}
+
+.dot-pulse {
+  position: relative;
+  left: -9999px;
+  width: 10px;
+  height: 10px;
+  border-radius: 5px;
+  background-color: var(--primary-color);
+  color: var(--primary-color);
+  box-shadow: 9999px 0 0 -5px;
+  animation: dot-pulse 1.5s infinite linear;
+  animation-delay: 0.25s;
+}
+
+.dot-pulse::before, .dot-pulse::after {
+  content: '';
+  display: inline-block;
+  position: absolute;
+  top: 0;
+  width: 10px;
+  height: 10px;
+  border-radius: 5px;
+  background-color: var(--primary-color);
+  color: var(--primary-color);
+}
+
+.dot-pulse::before {
+  box-shadow: 9984px 0 0 -5px;
+  animation: dot-pulse 1.5s infinite linear;
+  animation-delay: 0s;
+}
+
+.dot-pulse::after {
+  box-shadow: 10014px 0 0 -5px;
+  animation: dot-pulse 1.5s infinite linear;
+  animation-delay: 0.5s;
+}
+
+.reveal-element {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.reveal-element.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+[data-aos="fade-right"] {
+  transform: translateX(-20px);
+  opacity: 0;
+  transition: transform 0.6s ease, opacity 0.6s ease;
+}
+
+[data-aos="fade-right"].aos-animate {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+.tilt-card {
+  transform-style: preserve-3d;
+  transform: perspective(1000px);
+  transition: transform 0.1s;
+}
+
+.tilt-card .card-content {
+  transform: translateZ(20px);
+}
+
+.parallax-item {
+  transition: transform 0.2s ease-out;
+}
+
+.social-card[data-platform="github"]:hover {
+  background: #333;
+  color: white;
+}
+
+.social-card[data-platform="playstation"]:hover {
+  background: #003791;
+  color: white;
+}
+
+.social-card[data-platform="steam"]:hover {
+  background: #171a21;
+  color: white;
+}
+
+.social-card[data-platform="spotify"]:hover {
+  background: #1DB954;
+  color: white;
+}
+
+.social-card[data-platform="discord"]:hover {
+  background: #5865F2;
+  color: white;
+}
+
+.social-card[data-platform="tiktok"]:hover {
+  background: linear-gradient(90deg, #25F4EE, #FE2C55);
+  color: white;
+}
+
+.game-card[data-game="valorant"]:hover .game-card-front {
+  box-shadow: 0 10px 25px rgba(244, 63, 94, 0.4);
+}
+
+.game-card[data-game="minecraft"]:hover .game-card-front {
+  box-shadow: 0 10px 25px rgba(16, 185, 129, 0.4);
+}
+
+.game-card[data-game="fortnite"]:hover .game-card-front {
+  box-shadow: 0 10px 25px rgba(245, 158, 11, 0.4);
+}
+
+.game-card[data-game="flightsim"]:hover .game-card-front {
+  box-shadow: 0 10px 25px rgba(59, 130, 246, 0.4);
+}

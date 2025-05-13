@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // DOM Elements
     const loginContainer = document.getElementById('login-container');
     const mainContainer = document.getElementById('main-container');
     const loginForm = document.getElementById('login-form');
@@ -12,14 +11,12 @@ document.addEventListener('DOMContentLoaded', function() {
     const addReviewForm = document.getElementById('add-review-form');
     const closeReviewModalBtn = document.getElementById('close-review-modal');
 
-    // Check if user is logged in
     const isLoggedIn = localStorage.getItem('isLoggedIn');
     if (isLoggedIn === 'true') {
         showMainContent();
         loadRestaurants();
     }
 
-    // Login Form Handler
     loginForm.addEventListener('submit', async (e) => {
         e.preventDefault();
         const password = document.getElementById('password').value;
@@ -47,13 +44,11 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // Show Main Content
     function showMainContent() {
         loginContainer.classList.add('hidden');
         mainContainer.classList.remove('hidden');
     }
 
-    // Load Restaurants
     async function loadRestaurants() {
         try {
             const response = await fetch('http://helya.pylex.xyz:10209/restaurants');
@@ -64,7 +59,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // Display Restaurants
     async function displayRestaurants(restaurants) {
         restaurantsList.innerHTML = '';
         
@@ -75,7 +69,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // Fetch Reviews for a Restaurant
     async function fetchReviews(restaurantId) {
         try {
             const response = await fetch(`http://helya.pylex.xyz:10209/reviews?restaurant_id=${restaurantId}`);
@@ -86,7 +79,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // Create Restaurant Card
     function createRestaurantCard(restaurant, reviews) {
         const card = document.createElement('div');
         card.className = 'restaurant-card';
@@ -116,14 +108,12 @@ document.addEventListener('DOMContentLoaded', function() {
         return card;
     }
 
-    // Create Star Rating HTML
     function createStarRating(rating) {
         return Array(5).fill(0).map((_, index) => 
             `<i class="fas fa-star ${index < rating ? 'active' : ''}"></i>`
         ).join('');
     }
 
-    // Modal Handlers
     addRestaurantBtn.addEventListener('click', () => {
         addRestaurantModal.classList.add('active');
     });
@@ -136,7 +126,6 @@ document.addEventListener('DOMContentLoaded', function() {
         addReviewModal.classList.remove('active');
     });
 
-    // Star Rating Handler
     document.querySelectorAll('.rating').forEach(ratingContainer => {
         const stars = ratingContainer.querySelectorAll('i');
         stars.forEach(star => {
@@ -149,7 +138,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Add Restaurant Form Handler
     addRestaurantForm.addEventListener('submit', async (e) => {
         e.preventDefault();
         
@@ -193,7 +181,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // Add Review Form Handler
     addReviewForm.addEventListener('submit', async (e) => {
         e.preventDefault();
         
@@ -223,7 +210,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-// Global function to show add review modal
 window.showAddReviewModal = function(restaurantId) {
     document.getElementById('review-restaurant-id').value = restaurantId;
     document.getElementById('add-review-modal').classList.add('active');
