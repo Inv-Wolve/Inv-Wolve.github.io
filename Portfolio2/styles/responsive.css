@@ -1,0 +1,298 @@
+/* Responsive Design */
+
+/* Large Desktops (1440px and up) */
+@media (min-width: 1440px) {
+  .container {
+    max-width: 1320px;
+  }
+  
+  .hero-text h1 {
+    font-size: 5.5rem;
+  }
+  
+  .hero-text h2 {
+    font-size: 2.5rem;
+  }
+  
+  .bio {
+    font-size: 1.25rem;
+  }
+  
+  .profile-image-wrapper {
+    width: 320px;
+    height: 320px;
+  }
+}
+
+/* Standard Desktops (1200px - 1439px) */
+@media (max-width: 1439px) {
+  .container {
+    max-width: 1140px;
+  }
+  
+  .hero-text h1 {
+    font-size: 4.5rem;
+  }
+}
+
+/* Small Desktops and Laptops (992px - 1199px) */
+@media (max-width: 1199px) {
+  .container {
+    max-width: 960px;
+  }
+  
+  .hero-text h1 {
+    font-size: 4rem;
+  }
+  
+  .hero-text h2 {
+    font-size: 1.8rem;
+  }
+  
+  .profile-image-wrapper {
+    width: 250px;
+    height: 250px;
+  }
+  
+  .skills-grid {
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  }
+}
+
+/* Tablets (768px - 991px) */
+@media (max-width: 991px) {
+  .container {
+    max-width: 720px;
+  }
+  
+  .hero-content {
+    flex-direction: column;
+    text-align: center;
+    gap: var(--spacing-xl);
+  }
+  
+  .hero-text {
+    max-width: 100%;
+  }
+  
+  .cta-buttons {
+    justify-content: center;
+  }
+  
+  .projects-grid {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  }
+  
+  .contact-container {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-xl);
+  }
+  
+  .social-links {
+    justify-content: center;
+  }
+}
+
+/* Large Mobile (576px - 767px) */
+@media (max-width: 767px) {
+  html {
+    font-size: 14px;
+  }
+  
+  .container {
+    max-width: 540px;
+    padding: 0 var(--spacing-md);
+  }
+  
+  .navbar {
+    padding: 0 var(--spacing-md);
+  }
+  
+  .nav-links {
+    position: fixed;
+    top: 80px;
+    left: 0;
+    width: 100%;
+    height: calc(100vh - 80px);
+    background: var(--background);
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transform: translateX(-100%);
+    transition: transform var(--transition-normal);
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    gap: var(--spacing-xl);
+    z-index: var(--z-drawer);
+  }
+  
+  .nav-links.active {
+    transform: translateX(0);
+  }
+  
+  .menu-toggle {
+    display: block;
+  }
+  
+  .menu-toggle.active span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+  }
+  
+  .menu-toggle.active span:nth-child(2) {
+    opacity: 0;
+  }
+  
+  .menu-toggle.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -6px);
+  }
+  
+  .hero-text h1 {
+    font-size: 3.5rem;
+  }
+  
+  .hero-text h2 {
+    font-size: 1.5rem;
+  }
+  
+  .profile-image-wrapper {
+    width: 200px;
+    height: 200px;
+  }
+  
+  .section-header h2 {
+    font-size: 2rem;
+  }
+  
+  .skills-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .contact-form {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Small Mobile (575px and down) */
+@media (max-width: 575px) {
+  html {
+    font-size: 13px;
+  }
+  
+  .container {
+    padding: 0 var(--spacing-sm);
+  }
+  
+  .hero-text h1 {
+    font-size: 3rem;
+  }
+  
+  .hero-text h2 {
+    font-size: 1.4rem;
+  }
+  
+  .cta-buttons {
+    flex-direction: column;
+    width: 100%;
+    gap: var(--spacing-sm);
+  }
+  
+  .primary-button, 
+  .secondary-button {
+    width: 100%;
+  }
+  
+  .section-header h2 {
+    font-size: 1.8rem;
+  }
+  
+  .profile-image-wrapper {
+    width: 180px;
+    height: 180px;
+  }
+  
+  .projects-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .social-links {
+    flex-direction: column;
+    gap: var(--spacing-sm);
+  }
+  
+  .social-link {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .modal-content {
+    width: 95%;
+    padding: var(--spacing-sm);
+  }
+  
+  .modal-header {
+    padding: var(--spacing-md);
+  }
+  
+  .modal-body {
+    padding: var(--spacing-md);
+  }
+  
+  .qr-code-container {
+    width: 180px;
+    height: 180px;
+  }
+}
+
+/* Print Styles */
+@media print {
+  .navbar,
+  .donate-button,
+  .cta-buttons,
+  .submit-button,
+  .copy-button,
+  .social-links,
+  .modal,
+  .scroll-indicator {
+    display: none !important;
+  }
+  
+  body {
+    background: white;
+    color: black;
+  }
+  
+  .container {
+    max-width: 100%;
+    width: 100%;
+  }
+  
+  section {
+    page-break-inside: avoid;
+    padding: 1cm 0;
+    color: black;
+  }
+  
+  h1, h2, h3 {
+    color: black;
+  }
+  
+  p {
+    color: #333;
+  }
+  
+  .profile-image-wrapper {
+    box-shadow: none;
+  }
+  
+  .skill-card,
+  .project-card,
+  .contact-form-container,
+  .contact-info {
+    box-shadow: none;
+    border: 1px solid #ccc;
+    background: white;
+  }
+  
+  .skill-bar {
+    background: #6c5ce7;
+  }
+}

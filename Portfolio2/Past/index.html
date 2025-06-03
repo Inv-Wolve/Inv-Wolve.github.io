@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Portfolio History - Zykro</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/animations.css">
+    <link rel="stylesheet" href="../styles/components.css">
+    <link rel="stylesheet" href="../styles/responsive.css">
+    <style>
+        .version-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 2rem;
+        }
+
+        .version-card {
+            background: rgba(26, 26, 26, 0.7);
+            border-radius: var(--border-radius-lg);
+            padding: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all var(--transition-normal);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .version-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .version-date {
+            color: var(--primary-light);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .version-title {
+            color: var(--text-primary);
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .version-description {
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .version-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            background: var(--primary);
+            color: var(--text-primary);
+            border-radius: var(--border-radius-md);
+            transition: all var(--transition-normal);
+            text-decoration: none;
+        }
+
+        .version-link:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .back-button {
+            position: fixed;
+            top: 2rem;
+            left: 2rem;
+            padding: 0.75rem 1.5rem;
+            background: var(--primary);
+            color: var(--text-primary);
+            border-radius: var(--border-radius-md);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all var(--transition-normal);
+            z-index: 100;
+        }
+
+        .back-button:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .page-title {
+            text-align: center;
+            margin: 4rem 0;
+            color: var(--primary-light);
+            font-size: 2.5rem;
+        }
+    </style>
+</head>
+<body>
+    <a href="../index.html" class="back-button">
+        <span>← Back to Current</span>
+    </a>
+
+    <h1 class="page-title">Portfolio Timeline</h1>
+
+    <div class="container">
+        <div class="version-grid">
+            <div class="version-card" data-aos="fade-up">
+                <div class="version-date">April 2025</div>
+                <h2 class="version-title">Version 3.0</h2>
+                <p class="version-description">
+                    The latest iteration featuring a dark theme, animated particles, 
+                    and enhanced user interactions. Includes project showcase and 
+                    detailed skill progress visualization.
+                </p>
+                <a href="../index.html" class="version-link">
+                    <span>View Version</span>
+                </a>
+            </div>
+
+            <div class="version-card" data-aos="fade-up" data-aos-delay="100">
+                <div class="version-date">February 2025</div>
+                <h2 class="version-title">Version 2.0</h2>
+                <p class="version-description">
+                    A minimalist design with focus on typography and clean layouts. 
+                    Introduced the skills section and basic project cards.
+                </p>
+                <a href="./V1/index.html" class="version-link">
+                    <span>View Version</span>
+                </a>
+            </div>
+
+            <div class="version-card" data-aos="fade-up" data-aos-delay="200">
+                <div class="version-date">December 2024</div>
+                <h2 class="version-title">Version 1.0</h2>
+                <p class="version-description">
+                    The original portfolio featuring a simple single-page design 
+                    with basic information and contact details.
+                </p>
+                <a href="./V2/index.html" class="version-link">
+                    <span>View Version</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize animation on scroll
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.version-card');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            cards.forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                observer.observe(card);
+            });
+        });
+    </script>
+</body>
+</html>
