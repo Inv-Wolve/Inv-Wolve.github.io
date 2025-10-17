@@ -32,29 +32,12 @@
         </div>
 
         <div class="card">
-            <div class="content-card">
-                <p id="content-text" class="content-text"></p>
-            </div>
-
             <div id="answer-section" class="answer-section">
-                <p class="question-text">Was this written by a human or AI?</p>
+                <p class="question-text" id="question-text">Which of these texts was written by a human?</p>
 
-                <button class="btn btn-human" onclick="submitAnswer('Human')">
-                    <svg class="icon-medium" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/>
-                        <circle cx="12" cy="7" r="4"/>
-                    </svg>
-                    Human
-                </button>
-
-                <button class="btn btn-ai" onclick="submitAnswer('AI')">
-                    <svg class="icon-medium" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <rect x="3" y="11" width="8" height="8" rx="2"/>
-                        <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
-                        <rect x="13" y="11" width="8" height="8" rx="2"/>
-                    </svg>
-                    AI
-                </button>
+                <div class="options-grid" id="options-container">
+                    <!-- Options will be dynamically inserted here -->
+                </div>
             </div>
 
             <div id="feedback-section" class="feedback-section" style="display: none;">
@@ -93,8 +76,8 @@
             <p class="footer-text">Test your ability to distinguish AI-generated content from human-made content</p>
             <div class="footer-links">
                 <a href="index.html" class="footer-link">Home</a>
-                <a href="#" class="footer-link">About</a>
-                <a href="#" class="footer-link">Privacy</a>
+                <a href="about.html" class="footer-link">About</a>
+                <a href="privacy.html" class="footer-link">Privacy</a>
             </div>
         </div>
     </footer>

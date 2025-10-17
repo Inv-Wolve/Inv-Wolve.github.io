@@ -1,10 +1,11 @@
 // Load content.json
 let contentDatabase = [];
 
-fetch('./content.json')
+fetch('./js/content.json')
   .then(response => response.json())
   .then(data => {
     contentDatabase = data;
+    console.log("Content loaded successfully:", contentDatabase.length, "questions");
   })
   .catch(error => console.error("Error loading content:", error));
 
@@ -14,18 +15,21 @@ function getRandomContent(difficulty, usedIndices) {
         return null;
     }
 
+    // Filter by mode (difficulty) and exclude used indices
     const filtered = contentDatabase
         .map((item, index) => ({ item, index }))
         .filter(({ item, index }) =>
-            item.difficulty === difficulty && !usedIndices.includes(index)
+            item.mode === difficulty && !usedIndices.includes(index)
         );
 
     if (filtered.length === 0) {
+        // If no questions of the selected difficulty, try any unused question
         const anyFiltered = contentDatabase
             .map((item, index) => ({ item, index }))
             .filter(({ index }) => !usedIndices.includes(index));
 
         if (anyFiltered.length === 0) {
+            // If all questions used, pick a random one
             const random = Math.floor(Math.random() * contentDatabase.length);
             return { content: contentDatabase[random], index: random };
         }

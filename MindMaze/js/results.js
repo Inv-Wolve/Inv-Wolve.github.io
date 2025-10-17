@@ -28,7 +28,12 @@ function displayResults() {
 
         mistakes.forEach(mistake => {
             const li = document.createElement('li');
-            li.textContent = mistake;
+            // Handle both old string format and new object format
+            if (typeof mistake === 'string') {
+                li.textContent = mistake;
+            } else if (mistake.explanation) {
+                li.innerHTML = `<strong>You selected:</strong> "${mistake.selected.substring(0, 60)}..."<br><em>${mistake.explanation}</em>`;
+            }
             mistakesList.appendChild(li);
         });
     }
