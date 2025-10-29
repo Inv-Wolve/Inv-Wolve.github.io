@@ -22,7 +22,7 @@ I'm a student who loves coding and learning new shi daily.
 
 ### 🚀 Featured Projects
 - **[Quiver Tutoring](https://quivertutoring.com)** - A website for undergraduates to study any commerce related subjects! (Freelance work)
-- **[Timeswap-AI](https://zykro.dev/TimeSwap-AI)** - An AI powered task manager. 
+- **[Zyntrain-AI](https://github.com/Inv-Wolve/Zyntrain-AI)** - An AI powered task manager. 
 - **[My Portfolio](https://zykro.dev)** - My me page!
 - **[Lancework](https://discord.gg/RjafZjTZfs)** - A discord server for freelancers and clients! (Co-Owning)
 - **[Freelance Frontier](https://freelancefrontier.one/)** - A discord server where freelancers learn to be freelancers, meet clients, participate in events and get opportunities. (Freelance Work) (**My** work isn't released on it yet.)
